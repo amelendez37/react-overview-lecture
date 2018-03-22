@@ -1,0 +1,22 @@
+{
+  "name": "react-overview-lecture",
+  "version": "1.0.0",
+  "description": "React overview",
+  "main": "index.js",
+  "scripts": {
+    "rest-server": "json-server -w server/db.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianme213/react-overview-lecture.git"
+  },
+  "author": "Adrian Meza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adrianme213/react-overview-lecture/issues"
+  },
+  "homepage": "https://github.com/adrianme213/react-overview-lecture#readme",
+  "devDependencies": {
+    "json-server": "^0.12.1"
+  }
+}
