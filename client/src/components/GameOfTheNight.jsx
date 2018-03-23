@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GameOfTheNight = ({}) => (
+const GameOfTheNight = ({game}) =>(
   <div>
     <div className="ui cards centered">
       <div className="image">
@@ -9,7 +9,7 @@ const GameOfTheNight = ({}) => (
       <div className="card">
         <div className="content">
           <div className="header">
-            TITLE
+            {game.awayTeam.City} {game.awayTeam.Name} vs {game.homeTeam.City} {game.homeTeam.Name}
           </div>
           <div className="description">
             This is a description.

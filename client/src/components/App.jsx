@@ -7,13 +7,37 @@ import GameList from './GameList.jsx';
 
 const REST_SERVER_URL = `http://localhost:3000/gameentry`;
 
+const starterGame = {
+  "id": "9",
+  "scheduleStatus": "Normal",
+  "originalDate": null,
+  "originalTime": null,
+  "delayedOrPostponedReason": null,
+  "date": "2018-03-11",
+  "time": "9:00PM",
+  "awayTeam": {
+    "ID": "86",
+    "City": "Cleveland",
+    "Name": "Cavaliers",
+    "Abbreviation": "CLE"
+  },
+  "homeTeam": {
+    "ID": "105",
+    "City": "Los Angeles",
+    "Name": "Lakers",
+    "Abbreviation": "LAL"
+  },
+  "location": "Staples Center"
+};
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      gameOfTheNight: {},
+      gameOfTheNight: starterGame,
       games: []
     };
+    this.clickHandler = this.clickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +53,6 @@ class App extends React.Component {
       url: `${REST_SERVER_URL}/${gameId}`,
     })
     .then((res)=> {
-      console.log('Response ', res.data);
       context.setState({
         gameOfTheNight: res.data
       })
@@ -56,6 +79,13 @@ class App extends React.Component {
     })
   }
 
+  clickHandler(e) {
+    console.log('eeeeeee ', e);
+    this.setState({
+      gameOfTheNight: e
+    });
+  }
+
   render() {
     return (
       <div>
@@ -65,7 +95,7 @@ class App extends React.Component {
             <GameOfTheNight game={this.state.gameOfTheNight} />
           </div>
           <div className="eight wide column">
-            <GameList games={this.state.games} />
+            <GameList games={this.state.games} handler={this.clickHandler} />
           </div>
         </div>
       </div>
