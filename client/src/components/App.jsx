@@ -34,36 +34,52 @@ class App extends React.Component {
   
       this.state = {
         currentGame: starterGame, 
-        gameList: [],
+        gameList: []
       }
+
+      this.handleViewGameClick = this.handleViewGameClick.bind(this);
     }
   
     componentDidMount() {
-      this.loadTonightsGames();
+      this.loadTonightsGames((data) => this.init(data));
     }
   
-    loadTonightsGames() {
+    loadTonightsGames(callback) {
       axios({
         method: 'get',
         url: REST_SERVER_URL,
       })
       .then((response) => {
         console.log('response: ', response);
+        callback(response);
       })
       .catch((err) => {
-        console.error('');
+        console.error('error');
+      })
+    }
+
+    init(response) {
+      this.setState({
+        gameList: response.data,
+        currentGame: response.data[0]
+      });
+    }
+
+    handleViewGameClick(game) {
+      this.setState({
+        currentGame: game
       })
     }
   
     render() {
       return (
         <div>
-          <h1>Tonight's NBA Game Schedule</h1>
+          <h1 className="center">Tonight's NBA Game Schedule</h1>
           <div>
-            <GameOfTheNight />
+            <GameOfTheNight game={this.state.currentGame} />
           </div>
           <div>
-            <div>Games List Goes Here</div>
+            <GameList gameList={this.state.gameList} handleViewGameClick={this.handleViewGameClick} />
           </div>
         </div>
       );
